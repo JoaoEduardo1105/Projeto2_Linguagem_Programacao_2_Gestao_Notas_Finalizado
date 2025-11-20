@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<h2>{{ titulo }}</h2>
+<form method="post">
+  <label>Nome</label>
+  <input name="nome" required value="{{ usuario_obj.nome if usuario_obj }}">
+  <label>Email</label>
+  <input name="email" required value="{{ usuario_obj.email if usuario_obj }}">
+  <label>Tipo</label>
+  <select name="tipo_usuario">
+    <option value="aluno" {% if usuario_obj and usuario_obj.tipo_usuario=='aluno' %}selected{% endif %}>Aluno</option>
+    <option value="professor" {% if usuario_obj and usuario_obj.tipo_usuario=='professor' %}selected{% endif %}>Professor</option>
+    <option value="administrador" {% if usuario_obj and usuario_obj.tipo_usuario=='administrador' %}selected{% endif %}>Administrador</option>
+  </select>
+  {% if not usuario_obj %}
+  <label>Senha</label>
+  <input type="password" name="senha" required>
+  {% endif %}
+  <button class="btn" type="submit">Salvar</button>
+  <a class="btn ghost" href="{{ url_for('usuarios') }}">Cancelar</a>
+</form>
+{% endblock %}

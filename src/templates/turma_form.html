@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<h2>{{ titulo }}</h2>
+<form method="post">
+  <label>Nome</label>
+  <input name="nome" required value="{{ turma_obj.nome if turma_obj }}">
+  <label>Disciplina</label>
+  <select name="id_disciplina">
+    {% for d in disciplinas %}
+      <option value="{{ d[0] }}" {% if turma_obj and turma_obj.id_disciplina==d[0] %}selected{% endif %}>{{ d[1] }}</option>
+    {% endfor %}
+  </select>
+  <label>Professor</label>
+  <select name="id_professor">
+    <option value="">-- Nenhum --</option>
+    {% for p in professores %}
+      <option value="{{ p[0] }}" {% if turma_obj and turma_obj.id_professor==p[0] %}selected{% endif %}>{{ p[1] }}</option>
+    {% endfor %}
+  </select>
+  <button class="btn" type="submit">Salvar</button>
+  <a class="btn ghost" href="{{ url_for('turmas') }}">Cancelar</a>
+</form>
+{% endblock %}

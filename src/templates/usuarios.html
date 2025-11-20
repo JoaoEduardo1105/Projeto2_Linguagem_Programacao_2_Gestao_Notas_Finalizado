@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<div class="page-header">
+  <h2>Usuários</h2>
+  <a class="btn" href="{{ url_for('usuario_novo') }}">Novo Usuário</a>
+</div>
+
+<table class="table">
+  <thead><tr><th>ID</th><th>Nome</th><th>Email</th><th>Tipo</th><th>Ações</th></tr></thead>
+  <tbody>
+    {% for u in usuarios %}
+    <tr>
+      <td>{{ u[0] }}</td>
+      <td>{{ u[1] }}</td>
+      <td>{{ u[2] }}</td>
+      <td>{{ u[3] }}</td>
+      <td>
+        <a href="{{ url_for('usuario_editar', id=u[0]) }}">Editar</a>
+        <form style="display:inline" method="post" action="{{ url_for('usuario_excluir', id=u[0]) }}">
+          <button class="link-btn" type="submit" onclick="return confirm('Excluir usuário?')">Excluir</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

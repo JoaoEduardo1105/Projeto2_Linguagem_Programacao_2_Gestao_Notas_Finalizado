@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block conteudo %}
+<h2>Painel do Aluno</h2>
+
+<ul class="card-list">
+    <li><a class="card-link" href="{{ url_for('matriculas') }}">Minhas Matrículas</a></li>
+    <li><a class="card-link" href="{{ url_for('notas') }}">Minhas Notas</a></li>
+</ul>
+
+{% endblock %}

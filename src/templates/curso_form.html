@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<h2>{{ titulo }}</h2>
+<form method="post">
+  <label>Nome</label>
+  <input name="nome" required value="{{ curso_obj.nome if curso_obj }}">
+  <label>Descrição</label>
+  <textarea name="descricao">{{ curso_obj.descricao if curso_obj }}</textarea>
+  <button class="btn" type="submit">Salvar</button>
+  <a class="btn ghost" href="{{ url_for('cursos') }}">Cancelar</a>
+</form>
+{% endblock %}

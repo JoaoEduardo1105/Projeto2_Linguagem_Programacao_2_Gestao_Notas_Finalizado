@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<div class="page-header">
+  <h2>Matrículas</h2>
+  {% if session.usuario.tipo != 'aluno' %}
+  <a class="btn" href="{{ url_for('matricula_nova') }}">Nova Matrícula</a>
+  {% endif %}
+</div>
+
+<table class="table">
+  <thead><tr><th>ID</th><th>Aluno</th><th>Turma</th><th>Disciplina</th><th>Ações</th></tr></thead>
+  <tbody>
+    {% for m in matriculas %}
+    <tr>
+      <td>{{ m[0] }}</td>
+      <td>{{ m[1] }}</td>
+      <td>{{ m[2] }}</td>
+      <td>{{ m[3] }}</td>
+      <td>
+        {% if session.usuario.tipo != 'aluno' %}
+        <form style="display:inline" method="post" action="{{ url_for('matricula_excluir', id=m[0]) }}">
+          <button class="link-btn" type="submit" onclick="return confirm('Excluir matrícula?')">Excluir</button>
+        </form>
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

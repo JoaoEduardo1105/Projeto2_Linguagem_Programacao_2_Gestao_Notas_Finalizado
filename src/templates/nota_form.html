@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<h2>{{ titulo }}</h2>
+<form method="post">
+  <label>Matrícula</label>
+  <select name="id_matricula">
+    {% for m in matriculas %}
+      <option value="{{ m[0] }}" {% if nota_obj and nota_obj.id_matricula==m[0] %}selected{% endif %}>{{ m[1] }}</option>
+    {% endfor %}
+  </select>
+
+  <label>Nota 1</label>
+  <input name="nota1" value="{{ nota_obj.nota1 if nota_obj }}">
+  <label>Nota 2</label>
+  <input name="nota2" value="{{ nota_obj.nota2 if nota_obj }}">
+  <label>Nota final</label>
+  <input name="nota_final" value="{{ nota_obj.nota_final if nota_obj }}">
+
+  <button class="btn" type="submit">Salvar</button>
+  <a class="btn ghost" href="{{ url_for('notas') }}">Cancelar</a>
+</form>
+{% endblock %}

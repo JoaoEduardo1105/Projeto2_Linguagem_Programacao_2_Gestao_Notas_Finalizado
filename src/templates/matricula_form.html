@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<h2>{{ titulo }}</h2>
+<form method="post">
+  <label>Aluno</label>
+  <select name="id_aluno">
+    {% for a in alunos %}
+      <option value="{{ a[0] }}">{{ a[1] }}</option>
+    {% endfor %}
+  </select>
+  <label>Turma</label>
+  <select name="id_turma">
+    {% for t in turmas %}
+      <option value="{{ t[0] }}">{{ t[1] }}</option>
+    {% endfor %}
+  </select>
+  <button class="btn" type="submit">Salvar</button>
+  <a class="btn ghost" href="{{ url_for('matriculas') }}">Cancelar</a>
+</form>
+{% endblock %}

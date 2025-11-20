@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<div class="page-header">
+  <h2>Turmas</h2>
+{% if session.usuario.tipo == 'administrador' %}
+    <a class="btn" href="{{ url_for('turma_nova') }}">Nova Turma</a>
+{% endif %}
+
+</div>
+
+<table class="table">
+  <thead><tr><th>ID</th><th>Nome</th><th>Disciplina</th><th>Professor</th><th>Ações</th></tr></thead>
+  <tbody>
+    {% for t in turmas %}
+    <tr>
+      <td>{{ t[0] }}</td>
+      <td>{{ t[1] }}</td>
+      <td>{{ t[2] or '-' }}</td>
+      <td>{{ t[3] or '-' }}</td>
+      <td>
+        {% if session.usuario.type == 'administrador' and session.usuario.tipo == 'administrador' %}
+        <a href="{{ url_for('turma_editar', id=t[0]) }}">Editar</a>
+        <form style="display:inline" method="post" action="{{ url_for('turma_excluir', id=t[0]) }}">
+          <button class="link-btn" type="submit" onclick="return confirm('Excluir turma?')">Excluir</button>
+        </form>
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{ titulo or "Sistema" }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header>
+    <div class="container header-row">
+      <h1><a href="{{ url_for('index') }}">Sistema de Gestão de Notas</a></h1>
+      {% if session.usuario %}
+      <div class="user-info">
+        <span>{{ session.usuario.nome }} ({{ session.usuario.tipo }})</span>
+        <a class="btn small" href="{{ url_for('logout') }}">Sair</a>
+      </div>
+      {% endif %}
+    </div>
+  </header>
+
+  <main class="container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash">
+          {% for cat, msg in messages %}
+            <div class="flash-{{ cat }}">{{ msg }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+    {% block conteudo %}{% endblock %}
+  </main>
+
+  <footer class="container" style="padding:20px; color:#666; font-size:14px;">
+    <p>Trabalho - Sistema de Gestão de Notas</p>
+  </footer>
+</body>
+</html>

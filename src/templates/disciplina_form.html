@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<h2>{{ titulo }}</h2>
+<form method="post">
+  <label>Nome</label>
+  <input name="nome" required value="{{ disciplina_obj.nome if disciplina_obj }}">
+  <label>Descrição</label>
+  <textarea name="descricao">{{ disciplina_obj.descricao if disciplina_obj }}</textarea>
+  <label>Curso</label>
+  <select name="id_curso">
+    {% for c in cursos %}
+      <option value="{{ c[0] }}" {% if disciplina_obj and disciplina_obj.id_curso==c[0] %}selected{% endif %}>{{ c[1] }}</option>
+    {% endfor %}
+  </select>
+  <button class="btn" type="submit">Salvar</button>
+  <a class="btn ghost" href="{{ url_for('disciplinas') }}">Cancelar</a>
+</form>
+{% endblock %}

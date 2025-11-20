@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<div class="page-header">
+  <h2>Notas</h2>
+  {% if session.usuario.tipo != 'aluno' %}
+  <a class="btn" href="{{ url_for('nota_nova') }}">Lançar Nota</a>
+  {% endif %}
+</div>
+
+<table class="table">
+  <thead><tr><th>ID</th><th>Aluno</th><th>Disciplina</th><th>Nota1</th><th>Nota2</th><th>Final</th><th>Média</th><th>Ações</th></tr></thead>
+  <tbody>
+    {% for n in notas %}
+    <tr>
+      <td>{{ n[0] }}</td>
+      <td>{{ n[1] }}</td>
+      <td>{{ n[2] }}</td>
+      <td>{{ n[3] }}</td>
+      <td>{{ n[4] }}</td>
+      <td>{{ n[5] }}</td>
+      <td>{{ n[6] }}</td>
+      <td>
+        {% if session.usuario.tipo != 'aluno' %}
+        <a href="{{ url_for('nota_editar', id=n[0]) }}">Editar</a>
+        <form style="display:inline" method="post" action="{{ url_for('nota_excluir', id=n[0]) }}">
+          <button class="link-btn" type="submit" onclick="return confirm('Excluir nota?')">Excluir</button>
+        </form>
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<div class="page-header">
+  <h2>Disciplinas</h2>
+  <a class="btn" href="{{ url_for('disciplina_nova') }}">Nova Disciplina</a>
+</div>
+
+<table class="table">
+  <thead><tr><th>ID</th><th>Nome</th><th>Curso</th><th>Ações</th></tr></thead>
+  <tbody>
+    {% for d in disciplinas %}
+    <tr>
+      <td>{{ d[0] }}</td>
+      <td>{{ d[1] }}</td>
+      <td>{{ d[3] }}</td>
+      <td>
+        <a href="{{ url_for('disciplina_editar', id=d[0]) }}">Editar</a>
+        <form style="display:inline" method="post" action="{{ url_for('disciplina_excluir', id=d[0]) }}">
+          <button class="link-btn" type="submit" onclick="return confirm('Excluir disciplina?')">Excluir</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
